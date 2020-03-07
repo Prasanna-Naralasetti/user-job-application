@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+//import {BrowserRouter,Link,Route} from 'react-router-dom'
+import 'antd/dist/antd.css';
+import {BrowserRouter,Route,Link,Switch} from 'react-router-dom'
+import NotFound from './Component/NotFound/NotFound';
+import ApplicationModal from './Component/ApplicationForm/ApplicationModal';
+import Applications from './Component/Aplications/Applications';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div>
+        <Link to="/"/>
+        
+        <Switch>
+          <Route path="/" component={ApplicationModal} exact />
+          <Route path="/admin" component={Applications} exact />
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
