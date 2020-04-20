@@ -1,23 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import {Provider} from 'react-redux'
-import configureStore from './Store/configureStore'
-import {startGetUser} from './Action/user'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import configureStore from './store/configureStore'
+import { Provider } from 'react-redux'
+import { startSetUsers, startUpdateStatus, startSendUser } from './actions/userAction'
 
-const store=configureStore()
-store.subscribe(()=>{
+const store = configureStore()
+console.log(store.getState())
+
+store.subscribe(() => {
     console.log(store.getState())
 })
-console.log(store.getState());
+store.dispatch(startSetUsers())
+if (store.users != null) {
+    store.dispatch(startSendUser())
+    store.dispatch(startUpdateStatus())
+}
 
 
-store.dispatch(startGetUser())
-
-const jsx=(
+const jsx = (
     <Provider store={store}>
-        <App/>
+        <App />
     </Provider>
 )
-ReactDOM.render(jsx, document.getElementById('root'));
 
+ReactDOM.render(jsx, document.getElementById('root'))
